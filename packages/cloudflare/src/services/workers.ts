@@ -9737,6 +9737,17 @@ export const CreateScriptEdgePreviewMetadataObservabilityLogs = /*@__PURE__*/ S.
   identifier: "CreateScriptEdgePreviewMetadataObservabilityLogs",
 }) as any as S.Schema<CreateScriptEdgePreviewMetadataObservabilityLogs>;
 
+export interface CreateScriptEdgePreviewMetadataObservabilityIssues {
+  enabled?: boolean;
+}
+export const CreateScriptEdgePreviewMetadataObservabilityIssues = /*@__PURE__*/ S.suspend(() =>
+  S.Struct({
+    enabled: S.optional(S.Boolean),
+  }),
+).annotate({
+  identifier: "CreateScriptEdgePreviewMetadataObservabilityIssues",
+}) as any as S.Schema<CreateScriptEdgePreviewMetadataObservabilityIssues>;
+
 export interface CreateScriptEdgePreviewMetadataObservabilityTraces {
   enabled?: boolean;
   headSamplingRate?: number;
@@ -9758,6 +9769,8 @@ export interface CreateScriptEdgePreviewMetadataObservability {
   enabled?: boolean;
   headSamplingRate?: number;
   logs?: CreateScriptEdgePreviewMetadataObservabilityLogs;
+  redactQueryString?: boolean;
+  issues?: CreateScriptEdgePreviewMetadataObservabilityIssues;
   traces?: CreateScriptEdgePreviewMetadataObservabilityTraces;
 }
 export const CreateScriptEdgePreviewMetadataObservability = /*@__PURE__*/ S.suspend(() =>
@@ -9765,6 +9778,8 @@ export const CreateScriptEdgePreviewMetadataObservability = /*@__PURE__*/ S.susp
     enabled: S.optional(S.Boolean),
     headSamplingRate: S.optional(S.Number.pipe(T.Body("head_sampling_rate"))),
     logs: S.optional(CreateScriptEdgePreviewMetadataObservabilityLogs),
+    redactQueryString: S.optional(S.Boolean.pipe(T.Body("redact_query_string"))),
+    issues: S.optional(CreateScriptEdgePreviewMetadataObservabilityIssues),
     traces: S.optional(CreateScriptEdgePreviewMetadataObservabilityTraces),
   }),
 ).annotate({
@@ -11135,6 +11150,7 @@ export interface PutScriptMetadataObservability {
   logs?: PutScriptObservabilityLogs | null;
   traces?: PutScriptObservabilityTraces | null;
   issues?: PutScriptObservabilityIssues;
+  redactQueryString?: boolean;
 }
 export const PutScriptMetadataObservability = /*@__PURE__*/ S.suspend(() =>
   S.Struct({
@@ -11143,6 +11159,7 @@ export const PutScriptMetadataObservability = /*@__PURE__*/ S.suspend(() =>
     logs: S.optional(S.NullOr(PutScriptObservabilityLogs)),
     traces: S.optional(S.NullOr(PutScriptObservabilityTraces)),
     issues: S.optional(PutScriptObservabilityIssues),
+    redactQueryString: S.optional(S.Boolean.pipe(T.Body("redact_query_string"))),
   }),
 ).annotate({
   identifier: "PutScriptMetadataObservability",

@@ -2522,6 +2522,9 @@
           },
           "issues": {
             "target": "com.cloudflare.workers#PutScriptObservabilityIssues"
+          },
+          "redact_query_string": {
+            "target": "smithy.api#Boolean"
           }
         }
       }
